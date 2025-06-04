@@ -4,12 +4,8 @@ import tkinter as tk
 
 PI = np.pi
 
-# Signal rotation opreator
-def W(a):
-    ''' x rotation by angle -2*acos(a) '''
-    return np.array([[a, 1j*np.sqrt(1-a**2)], 
-                     [1j*np.sqrt(1-a**2), a]])
 
+    
 # Signal prcessing rotation operator
 def S(phi):
     ''' z rotation by angle -2*phi '''
@@ -44,7 +40,7 @@ def bb1plot():
     n = 0.5 * np.arccos(-1/4)
     BB1 = [PI/2, -n, 2*n, 0, -2*n, n]
     
-    for i in range(-30, 30):
+    for i in range(-20, 20):
         theta = i / 10
         a = np.cos(theta / 2)
         x.append(theta)
@@ -58,7 +54,6 @@ def bb1plot():
     plt.plot(x, y2, label="BB1 polynomial approx.")
     plt.xlabel("theta")
     plt.legend()
-    plt.ylim(0,1)
     plt.show()
 
 def chebychev_1plot():
