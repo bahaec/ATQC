@@ -60,6 +60,8 @@ def bb1plot():
     plt.legend()
     plt.ylim(0,1)
     plt.show()
+    
+
 
 def chebychev_1plot():
     x = []
@@ -120,6 +122,49 @@ def chebychev_3plot():
     plt.legend()
     plt.title("3rd Chebyshev Polynomial")
     plt.show()
+    
+def cos_plot():
+    x = []
+    y1 = []
+    y2 = []
+    
+    for i in range(-100, 100):
+        a = i / 100
+        x.append(a)
+        phi =  [-1.70932079,-0.05312746, 2.12066859,-0.83307065,-0.50074601, 0.40728859, 0.32838472, 0.9142489,-2.81320793, 0.40728859,-0.50074601, 2.30852201,-1.02092406,-0.05312746, 3.003068]
+        u = U(a, phi)
+        y1.append(np.real(u[0][0]))
+        y2.append(np.cos(5*a))
+    
+    plt.figure()
+    plt.plot(x, y1, label="QSP")
+    plt.xlabel("a")
+    plt.legend()
+    plt.title("Polynomial Approximation to the cosine function")
+    plt.show()
+    
+def thresh_plot():
+    x = []
+    y1 = []
+    y2 = []
+    
+    for i in range(-100, 100):
+        a = i / 100
+        x.append(a)
+        phi =  [0.73930816,-0.69010006,-0.63972139,-0.47754554,0.81797049, 0.09205065,-0.87660105, 0.13460844,0.23892207, 1.32216648,-2.90267058, 0.13460844,2.2649916,0.09205065,-2.32362216, 2.66404712,-0.63972139,-0.69010006, 2.31010449]
+        u = U(a, phi)
+        y1.append(np.real(u[0][0]))
+        if (a<-0.5 or a>0.5): y2.append(0)
+        else: y2.append(0.85)
+        
+    
+    plt.figure()
+    plt.plot(x, y1, label="QSP")
+    plt.plot(x, y2, label="Target")
+    plt.xlabel("a")
+    plt.legend()
+    plt.title("Polynomial Approximation to the threshhold function")
+    plt.show()
 
 root = tk.Tk()
 root.title("QSP Simulation")
@@ -128,4 +173,6 @@ tk.Button(root, text="BB1 Sequence", command=bb1plot, width=25).pack(pady=5)
 tk.Button(root, text="1st Chebyshev Polynomial", command=chebychev_1plot, width=25).pack(pady=5)
 tk.Button(root, text="2nd Chebyshev Polynomial", command=chebychev_2plot, width=25).pack(pady=5)
 tk.Button(root, text="3rd Chebyshev Polynomial", command=chebychev_3plot, width=25).pack(pady=5)
+tk.Button(root, text="Cosine Approximation", command=cos_plot, width=25).pack(pady=5)
+tk.Button(root, text="Threshold Approximation", command=thresh_plot, width=25).pack(pady=5)
 root.mainloop()
